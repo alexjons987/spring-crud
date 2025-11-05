@@ -69,4 +69,11 @@ public class PersonRepository {
     public boolean deletePersonById(int id) {
         return people.removeIf(p -> p.id() == id);
     }
+
+    public List<Person> getPeopleBySearch(String nameSearch, String occupationSearch) {
+        return people.stream()
+                .filter(p -> nameSearch == null || p.name().toLowerCase().contains(nameSearch))
+                .filter(p -> occupationSearch == null || p.occupation().toLowerCase().contains(occupationSearch))
+                .toList();
+    }
 }

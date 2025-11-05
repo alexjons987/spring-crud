@@ -47,4 +47,12 @@ public class PersonController {
         boolean removed = personService.deletePersonById(id);
         return removed ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/multisearch")
+    public List<Person> getPeopleBySearch(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String occupation
+    ) {
+        return personService.getPeopleBySearch(name, occupation);
+    }
 }

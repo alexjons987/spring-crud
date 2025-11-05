@@ -34,4 +34,8 @@ public class PersonService {
     public boolean deletePersonById(int id) {
         return personRepository.deletePersonById(id);
     }
+
+    public List<Person> getPeopleBySearch(String name, String occupation) {
+        return personRepository.getPeopleBySearch(name, occupation);
+    }
 }
