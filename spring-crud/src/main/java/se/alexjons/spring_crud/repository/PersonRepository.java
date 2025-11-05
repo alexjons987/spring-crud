@@ -15,11 +15,18 @@ public class PersonRepository {
         people.add(new Person(1, "Alex", 25, "System Developer"));
         people.add(new Person(2, "Bob", 30, "SCRUM Master"));
         people.add(new Person(3, "Carl", 34, "Project Owner"));
+        people.add(new Person(4, "Daniel", 34, "Frontend Developer"));
     }
 
     public Optional<Person> findById(int id) {
         return people.stream()
                 .filter(person -> person.getId() == id)
                 .findFirst();
+    }
+
+    public List<Person> findByOccupationSearch(String search) {
+        return people.stream()
+                .filter(person -> person.getOccupation().toLowerCase().contains(search.toLowerCase()))
+                .toList();
     }
 }
