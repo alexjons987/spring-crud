@@ -1,5 +1,6 @@
 package se.alexjons.spring_crud.controller;
 
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.alexjons.spring_crud.model.Person;
@@ -24,8 +25,10 @@ public class PersonController {
     }
 
     @GetMapping("/search/{searchTerm}")
-    public List<Person> getPersonByOccupationSearch(@PathVariable String searchTerm) {
-        return personService.findByOccupationSearch(searchTerm);
+    public List<ResponseEntity<Person>> getPersonByOccupationSearch(@PathVariable String searchTerm) {
+        return personService.findByOccupationSearch(searchTerm).stream()
+                .map(p -> ResponseEntity.status(200).body(p))
+                .toList();
     }
 
     @PostMapping("/add")
@@ -49,10 +52,12 @@ public class PersonController {
     }
 
     @GetMapping("/multisearch")
-    public List<Person> getPeopleBySearch(
+    public List<ResponseEntity<Person>> getPeopleBySearch(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String occupation
     ) {
-        return personService.getPeopleBySearch(name, occupation);
+        return personService.getPeopleBySearch(name, occupation).stream()
+                .map(p -> ResponseEntity.status(200).body(p))
+                .toList();
     }
 }
