@@ -30,13 +30,13 @@ public class PersonRepository {
                 .toList();
     }
 
-    public Person addPerson(Person person) {
+    public Optional<Person> addPerson(Person person) {
         int nextId = people.stream()
                 .mapToInt(Person::getId)
                 .max()
                 .orElse(0) + 1;
         person.setId(nextId);
         people.add(person);
-        return person;
+        return Optional.of(person);
     }
 }

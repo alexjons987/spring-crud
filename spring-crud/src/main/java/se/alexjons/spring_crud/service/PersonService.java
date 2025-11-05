@@ -23,7 +23,7 @@ public class PersonService {
         return personRepository.findByOccupationSearch(search);
     }
 
-    public Person addNewPerson(Person person) {
+    public Optional<Person> addNewPerson(Person person) {
         return personRepository.addPerson(person);
     }
 }

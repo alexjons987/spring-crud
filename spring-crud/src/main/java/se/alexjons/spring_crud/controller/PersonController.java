@@ -29,7 +29,9 @@ public class PersonController {
     }
 
     @PostMapping("/add")
-    public Person addNewPerson(@RequestBody Person person) {
-        return personService.addNewPerson(person);
+    public ResponseEntity<Person> addNewPerson(@RequestBody Person person) {
+        return personService.addNewPerson(person)
+                .map(p -> ResponseEntity.status(201).body(p))
+                .orElse(ResponseEntity.status(400).build());
     }
 }
