@@ -29,4 +29,14 @@ public class PersonRepository {
                 .filter(person -> person.getOccupation().toLowerCase().contains(search.toLowerCase()))
                 .toList();
     }
+
+    public Person addPerson(Person person) {
+        int nextId = people.stream()
+                .mapToInt(Person::getId)
+                .max()
+                .orElse(0) + 1;
+        person.setId(nextId);
+        people.add(person);
+        return person;
+    }
 }

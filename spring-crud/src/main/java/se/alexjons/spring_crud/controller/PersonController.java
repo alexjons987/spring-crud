@@ -1,10 +1,7 @@
 package se.alexjons.spring_crud.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import se.alexjons.spring_crud.model.Person;
 import se.alexjons.spring_crud.service.PersonService;
 
@@ -19,7 +16,7 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<Person> getPersonById(@PathVariable int id) {
         return personService.getPersonById(id)
                 .map(person -> ResponseEntity.status(200).body(person))
@@ -29,5 +26,10 @@ public class PersonController {
     @GetMapping("/search/{searchTerm}")
     public List<Person> getPersonByOccupationSearch(@PathVariable String searchTerm) {
         return personService.findByOccupationSearch(searchTerm);
+    }
+
+    @PostMapping("/add")
+    public Person addNewPerson(@RequestBody Person person) {
+        return personService.addNewPerson(person);
     }
 }

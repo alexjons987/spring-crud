@@ -22,4 +22,8 @@ public class PersonService {
     public List<Person> findByOccupationSearch(String search) {
         return personRepository.findByOccupationSearch(search);
     }
+
+    public Person addNewPerson(Person person) {
+        return personRepository.addPerson(person);
+    }
 }

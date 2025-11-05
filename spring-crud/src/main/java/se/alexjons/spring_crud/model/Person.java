@@ -1,10 +1,10 @@
 package se.alexjons.spring_crud.model;
 
 public class Person {
-    private final int id;
-    private final String name;
-    private final int age;
-    private final String occupation;
+    private int id;
+    private String name;
+    private int age;
+    private String occupation;
 
     public Person(int id, String name, int age, String occupation) {
         this.id = id;
@@ -15,6 +15,10 @@ public class Person {
 
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
