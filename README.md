@@ -15,7 +15,6 @@
 ### Requirements:
 * Create a `POST` endpoint according to REST conventions.
 * Accept a DTO object as the request body.
-* Validate the fields with `@Valid`.
 * Return the created object with status code `201`.
 ## Task 4: Update a resource
 ### Requirements:
