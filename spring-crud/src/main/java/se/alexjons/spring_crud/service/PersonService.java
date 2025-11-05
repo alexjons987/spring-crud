@@ -30,4 +30,8 @@ public class PersonService {
     public Optional<Person> updatePerson(int id, Person person) {
         return personRepository.updatePerson(id, person);
     }
+
+    public boolean deletePersonById(int id) {
+        return personRepository.deletePersonById(id);
+    }
 }

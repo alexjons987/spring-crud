@@ -19,19 +19,9 @@ public class PersonRepository {
     }
 
     public Optional<Person> findById(int id) {
-        Person person = people.stream()
+        return people.stream()
                 .filter(p -> p.id() == id)
-                .findFirst()
-                .get();
-
-        return Optional.of(
-                new Person(
-                        person.id(),
-                        person.name(),
-                        person.age(),
-                        person.occupation()
-                )
-        );
+                .findFirst();
     }
 
     public List<Person> findByOccupationSearch(String search) {
@@ -74,5 +64,9 @@ public class PersonRepository {
         people.set(index, updatedPerson);
 
         return Optional.of(updatedPerson);
+    }
+
+    public boolean deletePersonById(int id) {
+        return people.removeIf(p -> p.id() == id);
     }
 }

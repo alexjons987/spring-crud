@@ -41,4 +41,10 @@ public class PersonController {
                 .map(p -> ResponseEntity.status(200).body(p))
                 .orElse(ResponseEntity.status(400).build());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deletePerson(@PathVariable int id) {
+        boolean removed = personService.deletePersonById(id);
+        return removed ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
 }
