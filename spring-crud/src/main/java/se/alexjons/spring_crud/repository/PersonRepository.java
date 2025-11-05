@@ -19,24 +19,60 @@ public class PersonRepository {
     }
 
     public Optional<Person> findById(int id) {
-        return people.stream()
-                .filter(person -> person.getId() == id)
-                .findFirst();
+        Person person = people.stream()
+                .filter(p -> p.id() == id)
+                .findFirst()
+                .get();
+
+        return Optional.of(
+                new Person(
+                        person.id(),
+                        person.name(),
+                        person.age(),
+                        person.occupation()
+                )
+        );
     }
 
     public List<Person> findByOccupationSearch(String search) {
         return people.stream()
-                .filter(person -> person.getOccupation().toLowerCase().contains(search.toLowerCase()))
+                .filter(person -> person.occupation().toLowerCase().contains(search.toLowerCase()))
                 .toList();
     }
 
     public Optional<Person> addPerson(Person person) {
         int nextId = people.stream()
-                .mapToInt(Person::getId)
+                .mapToInt(Person::id)
                 .max()
                 .orElse(0) + 1;
-        person.setId(nextId);
-        people.add(person);
-        return Optional.of(person);
+
+        Person newPerson = new Person(nextId, person.name(), person.age(), person.occupation());
+        people.add(newPerson);
+        return Optional.of(newPerson);
+    }
+
+    public Optional<Person> updatePerson(int id, Person newPersonDetails) {
+        int index = -1;
+
+        for (int i = 0; i < people.size(); i++) {
+            if (people.get(i).id() == id) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            return Optional.empty();
+        }
+
+        Person updatedPerson = new Person(
+                id,
+                newPersonDetails.name(),
+                newPersonDetails.age(),
+                newPersonDetails.occupation()
+        );
+        people.set(index, updatedPerson);
+
+        return Optional.of(updatedPerson);
     }
 }

@@ -26,4 +26,8 @@ public class PersonService {
     public Optional<Person> addNewPerson(Person person) {
         return personRepository.addPerson(person);
     }
+
+    public Optional<Person> updatePerson(int id, Person person) {
+        return personRepository.updatePerson(id, person);
+    }
 }

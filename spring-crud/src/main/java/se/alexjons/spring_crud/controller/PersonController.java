@@ -34,4 +34,11 @@ public class PersonController {
                 .map(p -> ResponseEntity.status(201).body(p))
                 .orElse(ResponseEntity.status(400).build());
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable int id, @RequestBody Person person) {
+        return personService.updatePerson(id, person)
+                .map(p -> ResponseEntity.status(200).body(p))
+                .orElse(ResponseEntity.status(400).build());
+    }
 }
